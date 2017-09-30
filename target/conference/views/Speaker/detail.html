@@ -1,0 +1,45 @@
+<header ng-switch on="$location.path().indexOf('/Speakers/new') > -1">
+    <h3 ng-switch-when="true">Create a new Speaker</h3>
+    <h3 ng-switch-when="false">View or edit Speaker</h3>
+</header>
+<form id="SpeakerForm" name="SpeakerForm" class="form-horizontal" role="form">
+    
+
+    <div class="form-group" ng-class="{'has-error': SpeakerForm.firstname.$invalid}">
+        <label for="firstname" class="col-sm-2 control-label">Firstname</label>
+        <div id="firstnameControls" class="col-sm-10">
+            <input id="firstname" name="firstname" type="text" class="form-control" ng-model="speaker.firstname" placeholder="Enter the Speaker Firstname"></input>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': SpeakerForm.surname.$invalid}">
+        <label for="surname" class="col-sm-2 control-label">Surname</label>
+        <div id="surnameControls" class="col-sm-10">
+            <input id="surname" name="surname" type="text" class="form-control" ng-model="speaker.surname" placeholder="Enter the Speaker Surname"></input>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': SpeakerForm.bio.$invalid}">
+        <label for="bio" class="col-sm-2 control-label">Bio</label>
+        <div id="bioControls" class="col-sm-10">
+            <input id="bio" name="bio" type="text" ng-maxlength="2000" class="form-control" ng-model="speaker.bio" placeholder="Enter the Speaker Bio"></input>
+            <span class="help-block error" ng-show="SpeakerForm.bio.$error.maxlength">maximum length is 2000</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': SpeakerForm.twitter.$invalid}">
+        <label for="twitter" class="col-sm-2 control-label">Twitter</label>
+        <div id="twitterControls" class="col-sm-10">
+            <input id="twitter" name="twitter" type="text" class="form-control" ng-model="speaker.twitter" placeholder="Enter the Speaker Twitter"></input>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveSpeaker" name="saveSpeaker" class="btn btn-primary" ng-disabled="isClean() || SpeakerForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Save</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+            <button id="deleteSpeaker" name="deleteSpeaker" class="btn btn-danger" ng-show="speaker.id" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,85 @@
+<div class="form-horizontal">
+    <h3>Create a new Speaker</h3>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-sm-2">
+            <a id="Create" name="Create" class="btn btn-primary" href="#/Speakers/new"><span class="glyphicon glyphicon-plus-sign"></span> Create</a>
+        </div>
+    </div>
+</div>
+<hr/>
+<div>
+    <h3>Search for Speakers</h3>
+    <form id="SpeakerSearch" class="form-horizontal">
+        
+
+    <div class="form-group">
+        <label for="firstname" class="col-sm-2 control-label">Firstname</label>
+        <div class="col-sm-10">
+            <input id="firstname" name="firstname" class="form-control" type="text" ng-model="search.firstname" placeholder="Enter the Speaker Firstname"></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="surname" class="col-sm-2 control-label">Surname</label>
+        <div class="col-sm-10">
+            <input id="surname" name="surname" class="form-control" type="text" ng-model="search.surname" placeholder="Enter the Speaker Surname"></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="bio" class="col-sm-2 control-label">Bio</label>
+        <div class="col-sm-10">
+            <input id="bio" name="bio" class="form-control" type="text" ng-model="search.bio" placeholder="Enter the Speaker Bio"></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="twitter" class="col-sm-2 control-label">Twitter</label>
+        <div class="col-sm-10">
+            <input id="twitter" name="twitter" class="form-control" type="text" ng-model="search.twitter" placeholder="Enter the Speaker Twitter"></input>
+        </div>
+    </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-sm-10">
+                <a id="Search" name="Search" class="btn btn-primary" ng-click="performSearch()"><span class="glyphicon glyphicon-search"></span> Search</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="search-results">
+        <div class="table-responsive">
+        <table class="table table-responsive table-bordered table-striped clearfix">
+            <thead>
+                <tr>
+                    <th>Firstname</th>
+                    <th>Surname</th>
+                    <th>Bio</th>
+                    <th>Twitter</th>
+                </tr>
+            </thead>
+            <tbody id="search-results-body">
+                <tr ng-repeat="result in filteredResults | startFrom:currentPage*pageSize | limitTo:pageSize">
+                    <td><a href="#/Speakers/edit/{{result.id}}">{{result.firstname}}</a></td>
+                    <td><a href="#/Speakers/edit/{{result.id}}">{{result.surname}}</a></td>
+                    <td><a href="#/Speakers/edit/{{result.id}}">{{result.bio}}</a></td>
+                    <td><a href="#/Speakers/edit/{{result.id}}">{{result.twitter}}</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+        <ul class="pagination pagination-centered">
+        <li ng-class="{disabled:currentPage == 0}">
+            <a id="prev" href ng-click="previous()">«</a>
+        </li>
+        <li ng-repeat="n in pageRange" ng-class="{active:currentPage == n}" ng-click="setPage(n)">
+            <a href ng-bind="n + 1">1</a>
+        </li>
+        <li ng-class="{disabled: currentPage == (numberOfPages() - 1)}">
+            <a id="next" href ng-click="next()">»</a>
+        </li>
+    </ul>
+
+</div>
